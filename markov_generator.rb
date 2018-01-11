@@ -6,6 +6,11 @@ class MarkovGenerator
   def self.from_text text
     freq_hash = Hash.new {|hash, key| hash[key] = [] }
 
+    #put spaces before ending punctuation to count them as words.
+    text.gsub!(".", "\s.")
+    text.gsub!("!", "\s!")
+    text.gsub!("?", "\s?")
+
     text.split.each_cons(2) do |word, following_word|
       freq_hash[word] << following_word
     end
