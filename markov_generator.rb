@@ -10,6 +10,7 @@ class MarkovGenerator
     text.gsub!(".", "\s.")
     text.gsub!("!", "\s!")
     text.gsub!("?", "\s?")
+    text.gsub!("--", "")
 
     text.split.each_cons(2) do |word, following_word|
       freq_hash[word] << following_word
@@ -17,20 +18,17 @@ class MarkovGenerator
 
 
     require 'pp'
-    pp freq_hash
+    # pp freq_hash
     current_word = freq_hash.keys.sample
     sentence = [current_word]
 
     20.times do
-      p current_word
       current_word = freq_hash[current_word].sample
       sentence << current_word
     end
 
     sentence.join(" ")
   end
-
-
 
   def self.from_file_two file
     from_text_two File.read(file)
@@ -43,6 +41,7 @@ class MarkovGenerator
     text.gsub!(".", "\s.")
     text.gsub!("!", "\s!")
     text.gsub!("?", "\s?")
+    text.gsub!("--", "")
 
     text.split.each_cons(3) do |word1, word2, following_word|
       arr = [word1, word2]
@@ -51,7 +50,7 @@ class MarkovGenerator
 
 
     require 'pp'
-    pp freq_hash
+    # pp freq_hash
     current_words = freq_hash.keys.sample
     sentence = current_words[0] + " " + current_words[1]
 
