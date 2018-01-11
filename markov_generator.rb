@@ -21,7 +21,7 @@ class MarkovGenerator
     current_word = freq_hash.keys.sample
     sentence = [current_word]
 
-    12.times do
+    20.times do
       p current_word
       current_word = freq_hash[current_word].sample
       sentence << current_word
@@ -29,6 +29,8 @@ class MarkovGenerator
 
     sentence.join(" ")
   end
+
+
 
   def self.from_file_two file
     from_text_two File.read(file)
@@ -51,16 +53,12 @@ class MarkovGenerator
     require 'pp'
     pp freq_hash
     current_words = freq_hash.keys.sample
-    p current_words
     sentence = current_words[0] + " " + current_words[1]
 
-    12.times do
+    20.times do
       next_word_first = current_words[1]
-
       next_word = freq_hash[current_words].sample
-
       sentence << " " + next_word
-
       current_words = [current_words[1], next_word]
     end
 
